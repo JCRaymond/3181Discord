@@ -6,7 +6,7 @@
       "TEXT_BASIC": ["send_messages", "embed_links", "attach_files", "read_message_history", "add_reactions"],
       "VOICE_BASIC": ["connect", "speak", "use_voice_activation"]
    },
-	"roles": {
+   "roles": {
       "3181Bot": {
          "botrole": true,
          "permissions": "administrator"
@@ -44,7 +44,7 @@
          "channels": {
             "text:general": null,
             "text:ta-chat": {
-                  "Professor": "~view_channel"
+               "Professor": "~view_channel"
             },
             "voice:general": null
          }
