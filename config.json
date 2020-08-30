@@ -1,0 +1,6 @@
+{
+   "token": "<insert token here>",
+   "server_name": "ITSC3181-F20",
+   "sections": ["001", "002", "003"],
+   "num_groups": [8, 8, 8]
+}

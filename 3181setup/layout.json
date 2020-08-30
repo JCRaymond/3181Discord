@@ -1,0 +1,130 @@
+{
+   "templates": {
+      "counter1": 3
+   },
+   "aliases": {
+      "TEXT_BASIC": ["send_messages", "embed_links", "attach_files", "read_message_history", "add_reactions"],
+      "VOICE_BASIC": ["connect", "speak", "use_voice_activation"]
+   },
+	"roles": {
+      "3181Bot": {
+         "botrole": true,
+         "permissions": "administrator"
+      },
+      "Professor": {
+         "permissions": ["TEXT_BASIC", "VOICE_BASIC", "stream"],
+         "color": "9109ec",
+         "hoist": true,
+         "mentionable": true
+      },
+      "TA": {
+         "permissions": ["change_nickname", "manage_nicknames", "manage_emojis", "TEXT", "VOICE"],
+         "color": "0986ec",
+         "hoist": true,
+         "mentionable": true
+      },
+      "Student": {
+         "permissions": ["TEXT_BASIC", "VOICE_BASIC"],
+         "color": "07c520",
+         "hoist": true,
+         "mentionable": false
+      },
+      "##<section>": {
+         "template": "section"
+      },
+      "default": null
+   },
+   "channels": {
+      "category:TAs": {
+         "overwrites": {
+            "default": "~view_channel",
+            "TA": "view_channel",
+            "Professor": "view_channel"
+         },
+         "channels": {
+            "text:general": null,
+            "text:ta-chat": {
+                  "Professor": "~view_channel"
+            },
+            "voice:general": null
+         }
+      },
+      "category:General": {
+         "overwrites": {
+            "default": "~view_channel",
+            "Student": "view_channel",
+            "TA": "view_channel",
+            "Professor": "view_channel"
+         },
+         "channels": {
+            "text:lecture": {
+               "Professor": "~view_channel"
+            },
+            "text:concepts": null,
+            "text:logistics": null,
+            "text:off-topic": {
+               "Professor": "~view_channel"
+            },
+            "text:announcements": {
+               "Professor": "~send_messages",
+               "Student": "~send_messages"
+            },
+            "voice:##General Voice <counter1>": {
+               "template": "counter1"
+            },
+            "voice:Presentation": null
+         }
+      },
+      "category:##Lab <section>": {
+         "template": "section",
+         "overwrites": {
+            "default": "~view_channel",
+            "##<section>": ["view_channel","stream"],
+            "TA": "view_channel",
+            "Professor": "view_channel"
+         },
+         "channels": {
+            "text:##lab-<section>-ta": {
+               "##<section>": "~view_channel",
+               "Professor": "~view_channel"
+            },
+            "text:##lab-<section>": null,
+            "text:##lab-<section>-off-topic": {
+               "Professor": "~view_channel"
+            },
+            "text:##lab-<section>-announcements": {
+               "##<section>": "~send_messages",
+               "Professor": "~send_messages"
+            },
+            "text:##lab-<section>-group-<group_counter<section>>": {
+               "template": "##group_counter<section>",
+               "default": "~view_channel",
+               "##<section>": "~view_channel",
+               "Professor": "~view_channel",
+               "TA": "view_channel"
+            },
+            "voice:##Lab <section> - Presentation": {
+               "##<section>": "~stream"
+            },
+            "voice:##Lab <section> - Group <group_counter<section>>": {
+               "template": "##group_counter<section>",
+               "default": "~view_channel",
+               "##<section>": "~view_channel",
+               "Professor": "~view_channel",
+               "TA": "view_channel"
+            }
+         }
+      },
+      "category:New Member": {
+         "overwrites": {
+            "Professor": "~view_channel",
+            "TA": "~view_channel",
+            "Student": "~view_channel",
+            "default": ["view_channel","read_message_history"]
+         },
+         "channels": {
+            "text:new-member": null
+         }
+      }
+   }
+}
