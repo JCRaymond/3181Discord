@@ -1,6 +1,11 @@
 {
-   "token": "<insert token here>",
+   "token": "<bot token here>",
    "server_name": "ITSC3181-F20",
    "sections": ["001", "002", "003"],
-   "num_groups": [8, 8, 8]
+   "num_groups": [8, 8, 8],
+   "times": [
+      "Tuesdays 8:30am - 11:15am",
+      "Tuesdays 11:30am - 2:15pm",
+      "Tuesdays 2:30pm - 5:15pm"
+   ]
 }

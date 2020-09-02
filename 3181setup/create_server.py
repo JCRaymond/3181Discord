@@ -1,11 +1,8 @@
 import discord as d
-from time import sleep
 import json
 from collections import OrderedDict
-from pprint import pprint
 
 class dotdict(dict):
-
     __getattr__ = dict.get
     __setattr__ = dict.__setitem__
     __delattr__ = dict.__delitem__
