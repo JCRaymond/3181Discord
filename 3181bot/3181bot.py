@@ -158,6 +158,16 @@ async def _removelast(ctx):
     await dm.send('Removed "{}"'.format(fullname))
 
 @bot.command()
+async def repo(ctx):
+    user = ctx.author
+    dm = user.dm_channel
+    if dm is None:
+        await user.create_dm()
+        dm = user.dm_channel
+    
+    await dm.send('I see you like to snoop around. Here\'s my code:\nhttps://github.com/JCRaymond/3181Discord\n\n(it\'s public on github anyways)')
+
+@bot.command()
 async def resetregistration(ctx, *args):
     await _resetregistration(ctx, *args)
     write_dat()
