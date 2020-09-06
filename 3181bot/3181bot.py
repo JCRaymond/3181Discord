@@ -189,6 +189,21 @@ async def _resetregistration(ctx, *args):
         return
 
     reg_name = rd.registered_ids[mem.id]
+    sect = rd.student_sects[reg_name]
+    group = rd.group_num[mem.id]
+    
+    group_tc_name = 'lab-{}-group-{}'.format(sect,group)
+    text_channel = d.utils.get(guild.channels, name=group_tc_name)
+    text_overwrites = text_channel.overwrites
+    del text_overwrites[mem]
+    await text_channel.edit(overwrites=text_overwrites)
+
+    group_vc_name = 'Lab {} - Group {}'.format(sect,group)
+    voice_channel = d.utils.get(guild.channels, name=group_vc_name)
+    voice_overwrites = voice_channel.overwrites
+    del voice_overwrites[mem]
+    await voice_channel.edit(overwrites=voice_overwrites)
+
     del rd.registered_ids[mem.id]
     rd.registered_names.remove(reg_name)
     await mem.edit(nick=None, roles=[])
