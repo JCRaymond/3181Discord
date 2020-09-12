@@ -321,55 +321,5 @@ async def on_member_join(member):
         print(f'{member.name} given ownership!')
         print('Done.')
 
-async def stuff():
-    
-    default_text_overwrites = {
-        guild.default_role: d.PermissionOverwrite(view_channel=False),
-        TA: d.PermissionOverwrite(view_channel=True)
-    }
-    student_text_overwrites = d.PermissionOverwrite(view_channel=True)
-
-    default_voice_overwrites = {
-        guild.default_role: d.PermissionOverwrite(view_channel=False, connect=False),
-        TA: d.PermissionOverwrite(view_channel=True, connect=True)
-    }
-    student_voice_overwrites = d.PermissionOverwrite(view_channel=True, connect=True, stream=True)
-    
-    print(f'{client.user} has connected to {guild.name}(id: {guild.id})')
-    with open('student_groups.csv', 'r') as f:
-        lines = iter(f)
-        next(lines) # ignore csv headers
-        for line in lines:
-            lab, group, *students = line.strip().split(',')
-            
-            text_channel_name = f'lab-0{lab}-group-{group}'
-            voice_channel_name = f'Lab 0{lab} - Group {group}'
-
-            text_channel = d.utils.get(guild.channels, name=text_channel_name)
-            if text_channel is None:
-                print('Text channel "{text_channel_name}" does not exist')
-                break
-
-            voice_channel = d.utils.get(guild.channels, name=voice_channel_name)
-            if voice_channel is None:
-                print('Voice channel "{voice_channel_name}" does not exist')
-                break
-            
-            text_overwrites = dict(default_text_overwrites)
-            voice_overwrites = dict(default_voice_overwrites)
-            for student in students:
-                mem = guild.get_member_named(student)
-                if mem is None:
-                    continue
-                text_overwrites[mem] = student_text_overwrites
-                voice_overwrites[mem] = student_voice_overwrites
-            await text_channel.edit(overwrites=text_overwrites)
-            print(f'Updated text channel "{text_channel}"')
-            await voice_channel.edit(overwrites=voice_overwrites)
-            print(f'Updated voice channel "{voice_channel}"')
-            
-    await client.logout()
-    await client.close()
-
 client.run(config.token)
 
